@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "base64-img": "^1.0.4",
     "clarifai": "^2.7.1",
+    "file-system": "^2.2.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-particles-js": "^2.1.3",

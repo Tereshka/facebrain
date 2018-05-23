@@ -9,14 +9,20 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import './App.css';
 import myParameters from './particlesjs-config.json';
+// import base64Img from 'base64-img';
+var base64Img = require('base64-img');
+const fs = require('fs');
 
-const url = "https://facebrain-server.herokuapp.com";
+// const url = "https://facebrain-server.herokuapp.com";
+const url = "https://localhost:3001";
 
 const initialState = {
     input: '',
+    inputUrl: '',
     box: [{}],
     route: 'signin',
     isSignedIn: false,
+    selectedFile: null,
     user: {
       id: 0,
       name: "",
@@ -44,13 +50,41 @@ class App extends Component {
   }
 
   onInputChange = (event) => {
+    console.log(event.target);
+    this.setState({box: [{}]});
+    this.setState({input: ''});
     this.setState({input: event.target.value});
-    if (this.state.input.length === 0) {
-      this.setState({box: [{}]});
-    }
+    this.setState({inputUrl: event.target.value});
+    console.log(this.state.input + " ==" + this.state.inputUrl);
+  }
+
+  fileSelectedHandler = (event) => {
+    // this.setState({
+    //   selectedFile: event.target.files[0]
+    // });
+    // this.setState({input: URL.createObjectURL(event.target.files[0])});
+    //  console.log(event.target.files[0]);
+    //  console.log(URL.createObjectURL(event.target.files[0]));
+
+    var file = event.target.files[0];
+    var urlFile = URL.createObjectURL(file);
+    // var reader = new FileReader();
+    // reader.onloadend = function() {
+    //   data = reader.result.replace(/^data:image\/(png|jpg);base64,/, "");
+    //   console.log('RESULT', reader.result);
+    //   console.log('DATA', data);
+    // }
+    // reader.readAsDataURL(file);
+    const formData = new FormData()
+    formData.append('myFile', file, file.name)
+    // var data = await fs.readFileSync(file, { encoding: 'base64' });
+
+     this.setState({inputUrl: urlFile});
+     this.setState({input: urlFile.replace("blob:", "")});
   }
 
   onButtonSubmit =() => {
+    console.log( "+++++++ " + this.state.input);
     
     fetch(url + "/imageurl", {
             method: 'POST',
@@ -118,7 +152,7 @@ class App extends Component {
   }
 
   render() {
-    var {box, input, route, isSignedIn} = this.state;
+    var {box, inputUrl, route, isSignedIn} = this.state;
     return (
       <div className="App">
         <Particles className="particles" params={myParameters}/>
@@ -127,8 +161,10 @@ class App extends Component {
           ? <div>
               <Logo />
               <Rank name={this.state.user.name} entries={this.state.user.entries}/>
-              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-              <FaceRecognition box={box} imageUrl={input} />
+              <ImageLinkForm onInputChange={this.onInputChange} 
+                  onButtonSubmit={this.onButtonSubmit} 
+                  fileSelectedHandler={this.fileSelectedHandler}/>
+              <FaceRecognition box={box} imageUrl={inputUrl} />
             </div>  
           : (route === 'signin' || route === 'signout'
             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
