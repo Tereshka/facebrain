@@ -49,7 +49,6 @@ class App extends Component {
   }
 
   onButtonSubmit =() => {
-    
     fetch(url + "/imageurl", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
