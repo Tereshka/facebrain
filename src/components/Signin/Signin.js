@@ -20,8 +20,6 @@ class Signin extends React.Component{
 	}
 
 	onSubmitSignIn = () =>{
-		console.log(this.state.signInEmail + " " + this.state.signInPassword);
-
 		fetch(url + "/signin", {
 			method: "POST",
 			headers: {"Content-Type": "application/json"},
