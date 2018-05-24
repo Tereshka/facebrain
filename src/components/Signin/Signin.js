@@ -1,7 +1,6 @@
 import React from 'react';
 
-// const url = "https://facebrain-server.herokuapp.com";
-const url = "https://localhost:3001";
+const url = "https://facebrain-server.herokuapp.com";
 
 class Signin extends React.Component{
 	constructor(props){
