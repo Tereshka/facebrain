@@ -45,9 +45,7 @@ class App extends Component {
 
   onInputChange = (event) => {
     this.setState({input: event.target.value});
-    if (this.state.input.length === 0) {
-      this.setState({box: [{}]});
-    }
+    this.setState({box: [{}]});
   }
 
   onButtonSubmit =() => {
@@ -73,6 +71,7 @@ class App extends Component {
           .then(count => {
             this.setState(Object.assign(this.state.user,{entries: count}));
           })
+          .catch(console.log)
         }
         this.displayFaceBox(this.calculateFaceLocation(response));
       })
