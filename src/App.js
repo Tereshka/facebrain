@@ -10,8 +10,8 @@ import Register from './components/Register/Register';
 import './App.css';
 import myParameters from './particlesjs-config.json';
 
-//const url = "https://facebrain-server.herokuapp.com";
-const url = "http://localhost:3001";
+const url = "https://facebrain-server.herokuapp.com";
+// const url = "http://localhost:3001";
 
 const initialState = {
     input: '',
