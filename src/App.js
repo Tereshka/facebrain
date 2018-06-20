@@ -10,7 +10,8 @@ import Register from './components/Register/Register';
 import './App.css';
 import myParameters from './particlesjs-config.json';
 
-const url = "https://facebrain-server.herokuapp.com";
+//const url = "https://facebrain-server.herokuapp.com";
+const url = "http://localhost:3001";
 
 const initialState = {
     input: '',
@@ -44,6 +45,8 @@ class App extends Component {
   }
 
   onInputChange = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.files);
     this.setState({input: event.target.value});
     this.setState({box: [{}]});
   }

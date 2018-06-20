@@ -1,6 +1,7 @@
 import React from 'react';
 
-const url = "https://facebrain-server.herokuapp.com";
+//const url = "https://facebrain-server.herokuapp.com";
+const url = "http://localhost:3001";
 
 class Signin extends React.Component{
 	constructor(props){
@@ -20,8 +21,6 @@ class Signin extends React.Component{
 	}
 
 	onSubmitSignIn = () =>{
-		console.log(this.state.signInEmail + " " + this.state.signInPassword);
-
 		fetch(url + "/signin", {
 			method: "POST",
 			headers: {"Content-Type": "application/json"},

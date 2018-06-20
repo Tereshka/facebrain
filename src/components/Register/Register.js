@@ -1,6 +1,7 @@
 import React from 'react';
 
-const url = "https://facebrain-server.herokuapp.com";
+//const url = "https://facebrain-server.herokuapp.com";
+const url = "http://localhost:3001";
 
 class Register extends React.Component{
 	constructor(props){
