@@ -1,57 +1,53 @@
 import React from 'react';
 import './ImageLinkForm.css';
 
-class ImageLinkForm extends React.Component{
+class ImageLinkForm extends React.Component {
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
-			showUrl: true,
 			showFileChooser: false
 		};
 	}
 
 	onClickShowFileChooser = (event) => {
-    	this.setState({showFileChooser: true});
-    	this.setState({showUrl: false});
-  	}
+		this.setState({ showFileChooser: true });
+	}
 
-  	onClickShowUrl = (event) => {
-    	this.setState({showFileChooser: false});
-    	this.setState({showUrl: true});
-  	}
+	onClickShowUrl = (event) => {
+		this.setState({ showFileChooser: false });
+	}
 
-	render(){
-		const {onInputChange, onButtonSubmit} = this.props;
+	render() {
+		const { onInputChange, onButtonSubmit, disableFind } = this.props;
 		return (
-		<div className="ma4 mt0">
-			<p className="f3">
-				{'Magic is here!'}
-			</p>
-			<div className="center-content">
-				<div className="form pa4 br3 shadow-5">
-					<div data-toggle="buttons">
-						<label className="f4 link ph3 pv2 mb2 dib white bg-mid-gray" onClick={this.onClickShowUrl}><input  type="radio" name="options" id="option1" defaultChecked />URL</label>
-						<label className="f4 link ph3 pv2 mb2 dib white bg-mid-gray"  onClick={this.onClickShowFileChooser}><input type="radio" name="options" id="option2" />UPLOAD</label>
-					</div>
-					{ this.state.showFileChooser ?  
-						<div id="uploadComputer">
-							<label className="f3">Choose file</label>
-			                <input type="file" id="image" name="image" accept="image/*" onChange={onInputChange} />
-			            </div>
-		            : null }
-		            { this.state.showUrl ?
-						<div>
-							<input className="f4 pa2 w-70 center" type="text" onChange={onInputChange} 
-							onCut={onInputChange} 
-							onPaste={onInputChange} 
-							onInput={onInputChange} placeholder="Put your URL here" />
+			<div className="ma4 mt0">
+				<p className="f3">
+					{'Magic is here!'}
+				</p>
+				<div className="center-content">
+					<div className="form pa3 br3 shadow-5">
+						<div data-toggle="buttons">
+							<label className="f4 link ph3 pv2 dib white bg-mid-gray br3 mb2" onClick={this.onClickShowUrl}><input type="radio" name="options" id="option1" defaultChecked />URL</label>
+							<label className="f4 link ph3 pv2 dib white bg-mid-gray br3 mb2" onClick={this.onClickShowFileChooser}><input type="radio" name="options" id="option2" />UPLOAD</label>
 						</div>
-					: null }
-					<div><button className="w-30 grow f4 link ph3 pv2 dib white" onClick={onButtonSubmit}>Find face</button></div>
+						{this.state.showFileChooser ?
+							<div id="uploadComputer" className="mb2">
+								<label className="f3 white">Choose a file </label>
+								<input type="file" id="image" name="image" accept="image/*" onChange={onInputChange} />
+							</div>
+							: 
+							<div>
+								<input className="f4 pa2 w-100 center mb2" type="text" onChange={onInputChange}
+									onCut={onInputChange}
+									onPaste={onInputChange}
+									onInput={onInputChange} placeholder="Put your URL here" />
+							</div>
+							}
+						<button className="white b pv2 ph3 bn br2" onClick={onButtonSubmit} disabled={disableFind}>Find face</button>
+					</div>
 				</div>
 			</div>
-		</div>
 		);
 	}
 }

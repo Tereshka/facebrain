@@ -1,8 +1,5 @@
 import React from 'react';
 
-const url = "https://facebrain-server.herokuapp.com";
-// const url = "http://localhost:3001";
-
 class Register extends React.Component{
 	constructor(props){
 		super(props);
@@ -26,7 +23,7 @@ class Register extends React.Component{
 	}
 
 	onSubmitSignIn = () =>{
-		fetch(url + "/register", {
+		fetch(this.props.url + "/register", {
 			method: "POST",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify({
